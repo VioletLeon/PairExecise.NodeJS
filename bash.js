@@ -1,18 +1,19 @@
+const pwdExport = require('./pwd');
+const lsExport = require('./ls');
+
 process.stdout.write('prompt > ');
 
 process.stdin.on('data', (data) => {
   const cmd = data.toString().trim();
 
   if (cmd==="pwd") {
-    pwd();
+    pwdExport();
   }
-
-  else process.stdout.write('You typed: ')
+  else if(cmd==='ls'){
+    lsExport();
+  }
+  else process.stdout.write('You typed: ' + cmd)
 
   process.stdout.write('\nprompt > ');
 })
 
-function pwd() {
-  let directory = process.cwd();
-  process.stdout.write(directory)
-}
