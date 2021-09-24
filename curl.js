@@ -1,18 +1,15 @@
 
-const rq = require('request')
+const rq = require('request');
 
-
-function curl(url){
+module.exports = (url, done) => {
 
     rq.get(url, function(err,response,body){
 
         if(err){
             throw err
         }else{
-            process.stdout.write(body);
+            done(body);
         }
     })
 
 }
-
-module.exports = curl;

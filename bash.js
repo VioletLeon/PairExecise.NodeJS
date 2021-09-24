@@ -3,25 +3,31 @@ const lsExport = require('./ls');
 const catExport = require('./cat')
 const curlExport = require('./curl');
 
-process.stdout.write('prompt > ');
+const done = (output) => {
+  process.stdout.write(output);
+}
+
+done('prompt > ');
 
 process.stdin.on('data', (data) => {
   const cmd = data.toString().trim();
 
   if (cmd==="pwd") {
-    pwdExport();
+    pwdExport(done);
   }
   else if(cmd==='ls'){
-    lsExport();
+    lsExport(done);
   }
   else if (cmd.substring(0,3) === 'cat'){
-    catExport(cmd.substring(4));
+    catExport(cmd.substring(4), done);
 
   }else if(cmd.substring(0,4)==='curl'){
-    curlExport(cmd.substring(5));
+    curlExport(cmd.substring(5), done);
   }
-  else process.stdout.write('You typed: ' + cmd)
+  else done('You typed: ' + cmd)
 
-  process.stdout.write('\nprompt > ');
+  done('\nprompt > ');
 })
+
+
 

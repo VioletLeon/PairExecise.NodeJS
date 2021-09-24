@@ -1,6 +1,4 @@
-function pwd() {
-    let directory = process.cwd();
-    process.stdout.write(directory)
-  }
-
-module.exports = pwd;
+module.exports = (done) => {
+  let directory = process.cwd();
+  done(directory)
+};
